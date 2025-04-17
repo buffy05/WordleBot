@@ -1,5 +1,6 @@
 # WordleBot
 Need to do: 
+
     1. Compile list of previous literature/work/research done on optimal wordle-solving algorithms
     
     2. Obtain list of five-letter words (doesn't have to be exact to word bank that NYT uses, but should be close)
