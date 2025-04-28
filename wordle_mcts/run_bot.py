@@ -12,6 +12,9 @@ def play_mcts_game(solution, simulations=500):
     while attempts < 6:
         bot = MCTSBot(state, simulations=simulations)
         guess = bot.search()
+        if guess is None:
+            print("No valid guesses left. Failed to solve.")
+            return None
         game = WordleGame(word_list, target_word=solution)
         feedback = ''.join(game.get_feedback(guess))
         print(f"guess #{attempts+1}: {guess} -> {feedback}")
@@ -27,4 +30,4 @@ def play_mcts_game(solution, simulations=500):
 #will also get solved/unsolved statisics and time avergaes 
 #so far been testing on individual words given a certain number of simulations (1-300)
 if __name__ == "__main__":
-    play_mcts_game("crate", simulations=100)
+    play_mcts_game("crate", simulations=5)
