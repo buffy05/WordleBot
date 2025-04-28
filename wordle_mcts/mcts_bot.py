@@ -14,11 +14,16 @@ class MCTSBot:
     def search(self):
         for _ in range(self.simulations):
             node = self.select(self.root)
+            if node is None: 
+                continue
             reward = self.simulate(node.state)
             self.backpropagate(node, reward)
         best_child = self.root.best_child(c=0)
         if best_child is None:
-            return random.choice(self.root.state.get_possible_guesses())
+            possible_guesses = self.root.state.get_possible_guesses()
+            if not possible_guesses:
+                return None  # nothing to guess, can't continue
+            return random.choice(possible_guesses)
         return best_child.state.guess_history[-1][0]
 
     def select(self, node):
