@@ -25,7 +25,7 @@ Modular and extensible design for adding additional solving strategies
 Easy to run with separate folders and entry scripts for each bot. Each bot's driver file can be adapted easily to solve current wordles with an above average accuracy and solve rate. 
 
 
-Bot Descriptions
+Bot Descriptions: 
 Monte Carlo Tree Search (MCTS) Bot
 Uses simulation-based search and exploration vs. exploitation strategies to decide the next best word.
 
