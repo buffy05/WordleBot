@@ -1,4 +1,4 @@
-Overview
+Overview: 
 This project implements three distinct AI-based bots to solve Wordle puzzles, each leveraging a different algorithmic approach:
 
 Monte Carlo Tree Search (MCTS) Bot
@@ -9,25 +9,21 @@ Bayesian Network Bot
 
 Each bot is designed to autonomously play Wordle using a list of past solutions, simulating and displaying the solving process, performance statistics, and average guesses per solve.
 
-Features
+Features:
 Automatically solves Wordle puzzles using different AI principles
 
 Logs performance metrics such as:
 
-Number of words solved
+- Number of words solved
 
-Average number of turns per solution
+- Average number of turns per solution
+  
+- Solving Process and Used Guesses
 
 Modular and extensible design for adding additional solving strategies
 
-Easy to run with separate folders and entry scripts for each bot
+Easy to run with separate folders and entry scripts for each bot. Each bot's driver file can be adapted easily to solve current wordles with an above average accuracy and solve rate. 
 
-Technologies Used
-Python 3.10+
-
-Core libraries: random, math, itertools, collections
-
-Algorithm-specific implementations built from scratch
 
 Bot Descriptions
 Monte Carlo Tree Search (MCTS) Bot
