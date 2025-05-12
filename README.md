@@ -36,10 +36,12 @@ Applies constraint propagation and letter-position inference to systematically n
 Bayesian Network Bot
 Builds probabilistic models to update word likelihoods based on feedback from guesses.
 
-How to Run
+How to Run: 
+
 Each bot has its own folder and a dedicated entry script. To run, navigate to each folder and simply do python run_bot.py
 
 Future Improvements: 
+
 - Add user interface for interactive solving
 
 - Train bots on broader word distributions
