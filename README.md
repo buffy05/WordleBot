@@ -26,6 +26,7 @@ Easy to run with separate folders and entry scripts for each bot. Each bot's dri
 
 
 Bot Descriptions: 
+
 Monte Carlo Tree Search (MCTS) Bot
 Uses simulation-based search and exploration vs. exploitation strategies to decide the next best word.
 
