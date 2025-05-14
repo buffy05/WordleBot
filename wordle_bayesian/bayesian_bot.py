@@ -7,13 +7,13 @@ class BayesianBot:
 # simulated feedback best matches the real result.
 
     def __init__(self, word_list):
-        # Initialize valid words and uniform prior
+        #  Initializes the bot with a list of valid words and sets a uniform prior (equal probability for each word )
         self.valid_words = [w.strip().lower() for w in word_list]
         self.probs = [1/len(self.valid_words)] * len(self.valid_words)
 
     @staticmethod
     def generate_feedback(guess, true_word):
-        # 2=green, 1=yellow, 0=gray
+        #  Simulates Wordle feedback for a guess against a true word. returns a list of values: 2=green, 1=yellow, 0=gray
         feedback = [0] * len(guess)
         guess_chars = list(guess)
         true_chars = list(true_word)
@@ -35,6 +35,7 @@ class BayesianBot:
 
     #bayesian update
     def bayesian_update(self, guess, feedback):
+        # Performs a Bayesian update on the probability distribution. Words whose feedback matches the actual feedback are weighed more heavily.
         updated = []
         n = len(guess)
         for w, p in zip(self.valid_words, self.probs):
@@ -45,12 +46,12 @@ class BayesianBot:
         self.probs = [u / total for u in updated]
 
     def choose_move(self,game):
-        # pick top probability guess
+        # selects the next word by picking highest current probability 
         idx = max(range(len(self.probs)), key=lambda i: self.probs[i])
         return self.valid_words[idx]
 
     def update_constraints(self, guess, feedback):
-        # map WordleGame feedback chars to numeric codes (previous code used numbers for feedback but wordle_game uses characters)
+        # map WordleGame feedback chars to numeric codes and performs the bayesian update (previous code used numbers for feedback but wordle_game uses characters)
         mapping = {'b': 0, 'y': 1, 'g': 2}
         numeric_fb = [mapping[f] for f in feedback]
         self.bayesian_update(guess, numeric_fb)
