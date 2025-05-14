@@ -39,6 +39,8 @@ Builds probabilistic models to update word likelihoods based on feedback from gu
 How to Run: 
 
 Each bot has its own folder and a dedicated entry script. To run, navigate to each folder and simply do python run_bot.py
+The MCTS bot folder and the Bayesian bot folders both contain prev versions of the bots that are more buggy/less efficent, kept it there as reference
+Refined versions of all bots are in wordle_project/src, and to get stats over 1000 sampled past wordle answers, just do test_framwork.py (follow readme directions in folder)
 
 Future Improvements: 
 
