@@ -3,7 +3,7 @@ import os
 from game_simulator import run_mcts_bot, run_csp_bot, run_bayesian_bot, load_words
 
 # Configuration
-NUM_RUNS = 100  # Number of test runs per bot
+NUM_RUNS = 1000  # Number of test runs per bot (WILL TAKE TIME TO RUN (for me it was like 8-10 mins, can shorten this to 100 for faster results))
 WORD_LIST_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'wordslist.txt')
 
 def run_tests(bot_func, bot_name, target_words, words):
@@ -27,6 +27,7 @@ if __name__ == "__main__":
     
     # Select a random set of target words for this run
     target_words = random.sample(words, NUM_RUNS)
+    #target_words = target_words[:100]
     
     # Define bots to test
     bots = {

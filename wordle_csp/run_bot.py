@@ -18,22 +18,22 @@ def main():
         game = WordleGame(word_list, target_word=target)
         bot = CSPBot(word_list)
 
-        print(f"\n🔍 Test {idx}: Target word = {target}")
+        print(f"\n Test {idx}: Target word = {target}")
 
         while not game.is_over():
             guess = bot.choose_move(game)
             feedback = game.make_guess(guess)
-            print(f"  ➤ Guess: {guess.upper()} -> Feedback: {feedback}")
+            print(f"   Guess: {guess.upper()} -> Feedback: {feedback}")
             bot.update_constraints(guess, feedback)
 
         if game.is_won():
             successes += 1
             total_turns += game.current_attempt
-            print("  ✅ Solved in", game.current_attempt, "turns.")
+            print("  Solved in", game.current_attempt, "turns.")
         else:
-            print("  ❌ Failed to solve.")
+            print("  Failed to solve.")
 
-    print("\n📊 Summary:")
+    print("\n Summary:")
     print(f"  Total Games: {total_games}")
     print(f"  Successful Solves: {successes}")
     print(f"  Success Rate: {successes / total_games:.2%}")

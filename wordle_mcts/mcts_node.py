@@ -2,7 +2,7 @@ import math
 import random
 from wordle_game import WordleGame
 
-#referenced/adapted github tutorial
+#referenced github tutorial (listed in resources, but still buggy)
 def get_feedback(guess, solution):
     game = WordleGame([solution], target_word=solution)
     feedback_list = game.get_feedback(guess)
@@ -16,9 +16,11 @@ class MCTSNode:
         self.visits = 0
         self.value = 0
 
+    #might be overexpanding here?? (need to fix)
     def is_fully_expanded(self):
         return len(self.children) == len(self.state.get_possible_guesses())
 
+    #returns based on ucb score, c = 1.4 comes from the fact that it is generally set to square root of 2, approx 1.4
     def best_child(self, c=1.4):
         def ucb(node):
             if node.visits == 0:
@@ -28,6 +30,7 @@ class MCTSNode:
             return max(self.children.values(), key=ucb)
         return None
 
+    #expand new child from remaining guess + feedback (possibly buggy area?)
     def expand(self):
         guesses = self.state.get_possible_guesses()
         random.shuffle(guesses)

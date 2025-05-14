@@ -2,6 +2,9 @@ import random
 from mcts_node import MCTSNode
 from game_state import GameState
 
+#NOT WORKING COMPLETELY RIGHT, IMRPOVED VERSION IS IN wordle_project folder and stats are using that not this
+#keeping for reference though
+
 #full, comprehensive mcts bot, prev version was faster and less buggy... but was not that accurate
 #inspired by the github tutorial on mcts in python (will put link in sources) 
 #still a little buggy 
@@ -26,6 +29,7 @@ class MCTSBot:
             return random.choice(possible_guesses)
         return best_child.state.guess_history[-1][0]
 
+    #traverse tree using ucb until expandable node is found (or terminal node hit)
     def select(self, node):
         while not node.state.is_terminal():
             if not node.is_fully_expanded():
@@ -35,6 +39,7 @@ class MCTSBot:
                 break
         return node
 
+    #play out random guess until win/loss and returns reward
     def simulate(self, state):
         from wordle_game import WordleGame
 
@@ -57,8 +62,9 @@ class MCTSBot:
 
         return 0
 
+    #brings simulations reward up the tree
     def backpropagate(self, node, reward):
         while node is not None:
             node.visits += 1
             node.value += reward
-            node = node.parent
+            node = node.parent 

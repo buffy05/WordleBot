@@ -2,6 +2,7 @@ import math
 import random
 from utils import evaluate_guess
 
+#node for mcts tree, should store game state children, and other stats
 class MCTSNode:
     def __init__(self, state, parent=None):
         self.state = state
@@ -11,9 +12,11 @@ class MCTSNode:
         self.value = 0
 
     def is_fully_expanded(self):
-        # Limit expansion to 50 children for efficiency
-        return len(self.children) >= 50
+        #limiting expansion to 50 children for efficiency (and to prevent the over expansion issues that were happening earlier)
+        #this change also helps
+        return len(self.children) >= 50 
 
+    #returns based on ucb score, c = 1.4 comes from the fact that it is generally set to square root of 2, approx 1.4
     def best_child(self, c=1.4):
         def ucb(node):
             if node.visits == 0:
@@ -23,20 +26,21 @@ class MCTSNode:
             return max(self.children.values(), key=ucb)
         return None
 
+    #expand new child from remaining guesses and feedback combos (better version of prev mcts_node expand, reduces bugs)
     def expand(self, used_guesses=None):
-        # Get possible guesses, excluding those already used
+        #get possible guesses, excluding those already used
         guesses = [g for g in self.state.get_possible_guesses() if g not in used_guesses]
         
-        # Sample up to 50 guesses if there are more
+        #samples up to 50 guesses if there are more (for same issue as before)
         if len(guesses) > 50:
             guesses = random.sample(guesses, 50)
         
-        # Iterate through sampled guesses
+        #iterating through sampled guesses
         for guess in guesses:
-            # Sample up to 20 candidate solutions
+            #sampling up to 20 candidate solutions
             solutions = random.sample(self.state.candidates, min(20, len(self.state.candidates)))
             for solution in solutions:
-                feedback = evaluate_guess(guess, solution)  # Assumes evaluate_guess returns a string
+                feedback = evaluate_guess(guess, solution) 
                 key = (guess, feedback)
                 if key not in self.children:
                     next_state = self.state.next_state(guess, feedback)

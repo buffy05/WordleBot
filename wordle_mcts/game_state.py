@@ -17,6 +17,7 @@ def apply_feedback(guess, feedback, word):
                 return False
     return True
 
+#initial gamestate class... might need to revamp
 class GameState:
     def __init__(self, candidates, guess_history=None, depth=0):
         self.candidates = candidates

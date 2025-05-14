@@ -3,14 +3,14 @@ from mcts_node import MCTSNode
 from game_state import GameState
 
 #full, comprehensive mcts bot, prev version was faster and less buggy... but was not that accurate
-#inspired by the github tutorial on mcts in python (will put link in sources) 
-#still a little buggy 
 class MCTSBot:
     def __init__(self, game_state, simulations=100):
         self.simulations = simulations
         self.root = MCTSNode(game_state)
 
     #buggy area: needs revising (sometimes works, sometimes returns AttributeError: 'NoneType' object has no attribute 'state')
+    #update: error fixed, but will still keep comment in case future issues arise for debugging purposes
+    #main search loop to run simulations and select best guess
     def search(self):
         for _ in range(self.simulations):
             node = self.select(self.root)
@@ -26,6 +26,7 @@ class MCTSBot:
             return random.choice(possible_guesses)
         return best_child.state.guess_history[-1][0]
 
+    #traverse tree using ucb until expandable node is found (or terminal node hit)
     def select(self, node):
         while not node.state.is_terminal():
             if not node.is_fully_expanded():
@@ -35,6 +36,7 @@ class MCTSBot:
                 break
         return node
 
+    #play out random guess until win/loss and returns reward
     def simulate(self, state):
         from wordle_game import WordleGame
 
@@ -57,6 +59,7 @@ class MCTSBot:
 
         return 0
 
+    #brings simulations reward up the tree
     def backpropagate(self, node, reward):
         while node is not None:
             node.visits += 1
