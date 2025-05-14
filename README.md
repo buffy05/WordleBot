@@ -1,4 +1,4 @@
-Overview: 
+General Overview: 
 This project implements three distinct AI-based bots to solve Wordle puzzles, each leveraging a different algorithmic approach:
 
 Monte Carlo Tree Search (MCTS) Bot
@@ -8,6 +8,8 @@ Constraint Satisfaction Problem (CSP) Bot
 Bayesian Network Bot
 
 Each bot is designed to autonomously play Wordle using a list of past solutions, simulating and displaying the solving process, performance statistics, and average guesses per solve.
+
+For stats and official wordle bots, navigate to wordle_project directory–contains README that explains running and refinements
 
 Features:
 Automatically solves Wordle puzzles using different AI principles
